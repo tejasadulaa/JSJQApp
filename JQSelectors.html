@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JQ Selectors</title>
+    <script src="Scripts/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .highlight {
+            background-color: #ffffa0; /* light yellow */
+        }
+
+        .nohighlight {
+            background-color: #ffffff; /* white */
+        }
+
+        .mainHeading {
+            font-family: Arial;
+            font-size: 14pt;
+            color: green;
+        }
+
+        .buttonOver {
+            background-color: yellow;
+            color: red;
+        }
+
+        .buttonOut {
+            background-color: red;
+            color: yellow;
+        }
+
+        .listOver {
+            background-color: #b0ffb0; /* light green */
+            color: red;
+            border: 1px solid red;
+            width: 400px;
+        }
+
+        .listOut {
+            background-color: white;
+            color: black;
+        }
+    </style>
+    <script>
+// $(document).ready(function{}); is equivalent of <body onload=''>
+// short cut to above document.ready is $(function(){})
+$(function () {
+//alert('document loaded');
+$("#btnTest").click(function () {
+//alert('btnTest clicked');
+testButtonHandler();
+});
+//$("ul:eq(1)>li").mouseover(function () {
+$("#olist>li").mouseover(function () {
+$(this).removeClass("listOut");
+$(this).addClass("listOver");
+});
+//$("ul:eq(1)>li").mouseout(function () {
+$("#olist>li").mouseout(function () {
+$(this).removeClass("listOver");
+$(this).addClass("listOut");
+});
+$("#btnTest").mouseover(function () {
+$(this).removeClass("buttonOut");
+$(this).addClass("buttonOver");
+});
+$("#btnTest").mouseout(function () {
+$(this).removeClass("buttonOver");
+$(this).addClass("buttonOut");
+});
+});
+function testButtonHandler() {
+//alert("test button clicked");
+// select by id requires a #
+$("#para2").addClass("highlight");
+// select all paragraphs
+$("p").addClass("highlight");
+//select p that is inside a div with id of d1 (> direct child)
+$("div#d1>p").addClass("highlight");
+// select all children that are inside adiv with id of d1
+$("div#d1 p").addClass("highlight"); // space means child at any level
+// select the p that is right after a div (at the same level)
+//$("div+p").addClass("highlight");
+// to select multiple elements, use comma separated list
+$("#para2,#d1").addClass("highlight");
+// select by css class - use a dot
+//$(".mainHeading").css({ 'background-color': 'yellow', 'font-size': '20pt', 'color': 'red' });
+// to read data from a text box via its name attribute, select it and use val()
+var greet = $("input[name=txtGreet]").val();
+var name = $("input[name=txtNM]").val();
+//alert(greet + " " + name);
+$("#msg").text(greet + ' ' + name);
+$("#olist>li:even").addClass("highlight");
+//$("#olist>li:odd").addClass("highlight");
+//$("form[name=f1]>input[type=text]").addClass("highlight");
+// select first three li elements under id of olist
+//$("#olist>li:lt(3)").addClass("highlight");
+// use slice to select a range of items
+//$("#olist>li").slice(2,4).addClass("highlight");
+// use parent for selecting parent of an element
+//$("#pp1").parent().addClass("highlight");
+// use next to determine the next sibling
+//var greet = $("input[name=txtGreet]").val();
+//if (greet == "")
+// $("input[name=txtGreet]").next().text("greeting is required").css({'color':'red'})
+//else
+// $("input[name=txtGreet]").next().text("");
+//var name = $("input[name=txtNM]").val();
+//if (name == "")
+// $("input[name=txtNM]").next().text("name is required").css({ 'color': 'red' });
+//else
+// $("input[name=txtNM]").next().text("");
+// search for a particular text in html and perform an action
+// e.g., highlight an li where the word Important appears
+//$("ul li:contains('important')").addClass("highlight");
+//// highlight any paragraph if the word popular appears in it
+//$("p").each(function () {
+// var ptext = $(this).text();
+// var pos = ptext.toLowerCase().indexOf('popular');
+// if (pos >= 0)
+// $(this).addClass("highlight");
+//});
+}
+    </script>
+</head>
+<body>
+    <h2>JQuery Selectors</h2>
+    <h3 class="mainHeading">JQuery allows easy selection of html elements</h3>
+    <ul>
+        <li>JQuery is a Javascript library</li>
+        <li>In JQuery, first we select something, then apply an action to it</li>
+        <li>important: Do not forget to reference the JQuery library</li>
+        <li>Majority of the time, a JQuery selector returns a JQuery object</li>
+        <li>JQuery actions can be chained</li>
+    </ul>
+    <p>
+        JQuery's simplicity in selecting many items and then be able to apply
+        actions is making it one of the most popular Javascript libraries.
+    </p>
+    <p id="para2">
+        JQuery has excellent support for AJAX operations
+    </p>
+    <div id="d1">
+        JQuery selectors can be divided into 5 main categories
+        <p id="pp1">A JQuery selector can select one or many items</p>
+        <div>
+            <p>Another para</p>
+        </div>
+    </div>
+    <p>
+        This paragraph is after the div. Popular color is purple
+    </p>
+    <ul id="olist">
+        <li>JQuery can select based on an id</li>
+        <li>JQuery can select based on an HTML element</li>
+        <li>JQuery can select based on css class</li>
+        <li>JQuery can select based on an attribute</li>
+        <li>JQuery can select children of an element</li>
+    </ul>
+    <p>Another paragraph later after the div</p>
+    <hr />
+    <form name="f1">
+        <input type="button" name="btnTest" id="btnTest" value="Test" /><br />
+        Greetings: <input type="text" name="txtGreet" /><span>*</span><br />
+        Name: <input type="text" name="txtNM" /><span>*</span><br />
+        <input type="button" name="btnTest2" value="XYZ" />
+    </form>
+    <div id="msg"></div>
+    <input type="text" name="txtT1" />
+</body>
+</html>

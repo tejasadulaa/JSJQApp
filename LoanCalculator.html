@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+function calculate() {
+var amt = parseFloat(document.form1.txtAmt.value);
+var rate = parseFloat(document.form1.txtRate.value);
+var dur = parseFloat(document.form1.txtDur.value);
+var monthlyPayment = amt * rate / 1200.0 *
+Math.pow(rate / 1200.0 + 1, dur) /
+(Math.pow(rate / 1200.0 + 1, dur) - 1);
+var totalPayment = amt * Math.pow((1 + rate / 1200.0), dur);
+document.form1.txtMonthly.value = monthlyPayment.toFixed(2);
+document.form1.txtTotal.value = totalPayment.toFixed(2);
+}
+    </script>
+</head>
+<body>
+    <h3>Loan Calculator</h3>
+    <div class="container">
+        <div class="col-md-12">
+            <table align="center">
+                <tr>
+                    <td>
+                        <form name="form1">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary />
+                            <div class="form-group row">
+                                <label class="col-md-3" for="txtAmt">Amount</label>
+                                <div class="col-md-9">
+                                    <input name="txtAmt" id="txtAmt" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3" for="txtDur">Duration (months)</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="txtDur" name="txtDur" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3" for="txtRate">Rate(%)</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="txtRate" name="txtRate" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3">Monthly Payment</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="txtMonthly" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3">Total Payment</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="txtTotal" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-9">
+                                    <button type="button" id="btncalc" onclick="calculate()" class="btn btn-success">Calculate</button>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

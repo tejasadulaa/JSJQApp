@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JQ Calculator</title>
+    <style>
+        body {
+            font-family: Arial;
+            font-size: 11pt;
+        }
+
+        .buttonOver {
+            font-family: arial;
+            background-color: green;
+            color: yellow;
+        }
+
+        .buttonOut {
+            font-family: arial;
+            background-color: yellow;
+            color: green;
+        }
+    </style>
+    <script src="Scripts/jquery-3.6.0.min.js"></script>
+    <script>
+$(function () { // equivalent of onload in Javascript
+// attach event handlers
+$("input[name=txtNum1]").focus();
+$("input[name=btnCalculate]").mouseover(function () {
+$(this).removeClass("buttonOut");
+$(this).addClass("buttonOver");
+});
+$("input[name=btnCalculate]").mouseout(function () {
+$(this).removeClass("buttonOver");
+$(this).addClass("buttonOut");
+});
+$("input[name=btnCalculate]").click(doCompute); // like a delegate
+$("input[name=txtNum1]").keypress(handleTextBox1);
+$("input[name=txtNum2]").keypress(handleTextBox2);
+});
+function handleTextBox1(ev) {
+var key = ev.which || ev.keyCode;
+if (key == 13)
+$("input[name=txtNum2]").focus();
+if (!(((key >= 48) && (key <= 57)) || (key == 46)))
+ev.preventDefault();
+}
+function handleTextBox2(ev) {
+var key = ev.which || ev.keyCode;
+if (key == 13)
+doCompute();
+if (!(((key >= 48) && (key <= 57)) || (key == 46)))
+ev.preventDefault();
+}
+function doCompute() {
+//alert('do compute');
+var num1 = parseFloat($("input[name=txtNum1]").val());
+var num2 = parseFloat($("input[name=txtNum2]").val());
+// determine which radio button is checked
+var operation = $("input[name=radOperation]:checked").val();
+var res = 0;
+switch (operation.toUpperCase()) {
+case "ADD": res = num1 + num2;
+break;
+case "SUB": res = num1 - num2;
+break;
+case "MUL": res = num1 * num2;
+break;
+case "DIV": res = num1/num2;
+break;
+}
+$("input[name=txtRes]").val(res);
+}
+    </script>
+</head>
+<body>
+    <h2>JQuery Based Calculator</h2>
+    <form name="f1">
+<pre>
+First Number : <input type="text" name="txtNum1" />
+Second Number: <input type="text" name="txtNum2" />
+-----------------
+Result : <input type="text" name="txtRes" />
+Add <input type="radio" name="radOperation" value="add" checked="checked" />
+Sub <input type="radio" name="radOperation" value="sub" />
+Mul <input type="radio" name="radOperation" value="mul" />
+Div <input type="radio" name="radOperation" value="div" />
+<input type="button" name="btnCalculate" value="Calculate" />
+</pre>
+    </form>
+</body>
+</html>

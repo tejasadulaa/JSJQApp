@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+function parseFullName()
+{
+var s1;
+s1 = prompt("Please Enter Your Full Name", "your name here")
+var strFirst, strLast
+var posBlank
+posBlank = s1.indexOf(" ",0) ; // 0 is start position, search for space
+var countFromRight
+countFromRight = s1.length-posBlank
+alert("First Name = " + s1.substring(0,posBlank) + "\n" +
+"Last Name = " + s1.substring(posBlank,posBlank+countFromRight));
+}
+    </script>
+</head>
+<body>
+    <h3> String Processing - Name Parsing Example </h3>
+    <hr />
+    <input type="button" value="Enter Full Name" onclick="parseFullName()">
+</body>
+</html>

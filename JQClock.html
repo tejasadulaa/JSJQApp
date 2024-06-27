@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JQ Clock</title>
+    <script src="Scripts/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            font-size: 12pt;
+        }
+
+        .cstyle {
+            font-weight: bold;
+            background-color: #bbffbb; /* light green */
+            border: 3px solid green;
+            width: 100px;
+            height: 25px;
+            color: red;
+        }
+
+        .cstyle2 {
+            font-weight: bold;
+            background-color: red;
+            border: 3px solid green;
+            width: 100px;
+            height: 25px;
+            color: yellow;
+        }
+    </style>
+    <script>
+var tm; // timer
+var pos = 0; // position of the clock
+$(function () {
+myClock();
+});
+function myClock() {
+var d1 = new Date(); // returns current date and time
+var hours = d1.getHours();
+if (hours < 10)
+hours = "0" + hours;
+var mins = d1.getMinutes();
+if (mins < 10)
+mins = "0" + mins;
+var secs = d1.getSeconds();
+if (secs < 10)
+secs = "0" + secs;
+var currtime = hours + ":" + mins + ":" + secs;
+$("#divc").text(currtime);
+$("#divc").css({ 'left': pos });
+pos = pos + 5;
+if (pos > 50) {
+// if we assign a new style, we have to remove the old style
+$("#divc").removeClass("cstyle");
+$("#divc").addClass("cstyle2"); // changes to red mode
+}
+if (pos > 75)
+clearTimeout(tm); // stop the timer
+else
+tm = setTimeout("myClock()", 1000); // call myClock after 1 sec
+}
+    </script>
+</head>
+<body>
+    <div class="cstyle" style="position:absolute" id="divc"></div>
+    <br />
+    <br />
+    <h2>Online Test</h2>
+    some questions
+</body>
+</html>

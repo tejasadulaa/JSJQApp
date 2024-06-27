@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- adder.htm -->
+    <title> Adder </title>
+    <script type="text/javascript">
+function doAdd() {
+var num1 = parseFloat(document.F1.txtNum1.value);
+if (isNaN(num1)) {
+alert("invalid first number");
+document.F1.txtRes.value = "";
+return;
+}
+var num2 = parseFloat(document.F1.txtNum2.value);
+var res = num1 + num2;
+document.F1.txtRes.value = res;
+}
+function handleKey1() { // key press handler for first text box
+var code = event.keyCode; // ASCII code for key being pressed
+if (code == 13) // enter key has ASCII code of 13
+document.F1.txtNum2.focus()
+if (!(((code >= 48) && (code <= 57)) || (code == 46))) {
+return false;// cancel keyboard entry for other than 0-9 and decimal
+}
+}
+function handleKey2() { // key press handler for second text box
+var code = window.event.keyCode;
+if (code == 13) // enter key has ASCII code of 13
+doAdd()
+if (!(((code >= 48) && (code <= 57)) || (code == 46))) {
+return false; // cancel keyboard entry for other than 0-9 and decimal
+}
+}
+function init() {
+document.F1.txtNum1.focus(); // set keyboard focus on first text box
+}
+    </script>
+</head>
+<body onload="init()">
+    <h2>Simple Web Adder</h2>
+    <form name="F1">
+<pre>
+First Number : <input onkeypress="return handleKey1()" name="txtNum1" />
+Second Num :   <input onkeypress="return handleKey2()" name="txtNum2" />
+               -------------------
+Result :       <input name="txtRes" />
+ <input type="button" name="btnAdd" value="+"
+       onclick="doAdd()" />
+</pre>
+    </form>
+</body>
+</html>
